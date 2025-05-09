@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>نصر الله - فضايح الصور</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+    }
+
+    header {
+      background-color: #c0392b;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      font-size: 24px;
+    }
+
+    .controls {
+      text-align: center;
+      margin: 20px;
+    }
+
+    .controls input,
+    .controls button {
+      padding: 10px;
+      margin: 5px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      padding: 20px;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    نصر الله - فضايح الصور
+  </header>
+
+  <div class="controls">
+    <input type="file" id="imageInput" accept="image/*">
+    <button onclick="addImage()">رفع صورة</button>
+    <button onclick="deleteImages()">حذف الصور</button>
+  </div>
+
+  <div class="gallery" id="gallery">
+    <!-- الصور تنضاف هنا -->
+  </div>
+
+  <script>
+    function addImage() {
+      const input = document.getElementById('imageInput');
+      const gallery = document.getElementById('gallery');
+
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const img = document.createElement('img');
+          img.src = e.target.result;
+          gallery.appendChild(img);
+        }
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    function deleteImages() {
+      document.getElementById('gallery').innerHTML = '';
+    }
+  </script>
+
+</body>
+</html>
